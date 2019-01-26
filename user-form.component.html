@@ -1,0 +1,59 @@
+
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <div *ngIf="activeIndex == 0">
+    <div class="ui-g">
+      <div class="ui-g-4">First Name:</div>
+      <div class="ui-g-4">
+        <input type="text" formControlName="firstName">
+
+      </div>
+    </div>
+    <div class="ui-g">
+      <div class="ui-g-4">Last Name:</div>
+      <div class="ui-g-4">
+        <input type="text" formControlName="lastName">
+
+
+      </div>
+    </div>
+    <div class="ui-g">
+      <div class="ui-g-4">user Name</div>
+      <div class="ui-g-4">
+        <input type="text" pInputText class="form-control" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+        <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+          <div *ngIf="f.userName.errors.required">start date is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g">
+      <div class="ui-g-4">password</div>
+      <div class="ui-g-4">
+
+        <input type="text" pInputText class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">start date is required</div>
+        </div>
+      </div>
+    </div>
+    <button type="submit">Next</button>
+  </div>
+  <div *ngIf="activeIndex == 1">
+    <div class="ui-g">
+      <div class="ui-g-4">image</div>
+      <div class="ui-g-4">
+        <p-fileUpload    name="myfile[]" url="./upload.cs" multiple="multiple"
+                      accept="image/*" maxFileSize="1000000"></p-fileUpload>
+ 
+        <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+          <div *ngIf="f.image.errors.required">start date is required</div>
+        </div>
+
+      </div>
+    </div>
+    <button type="submit">Next</button>
+  </div>
+  <div *ngIf="activeIndex == 2">
+    <button type="submit">Submit</button>
+  </div>
+</form>
+<p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="false"></p-steps>
